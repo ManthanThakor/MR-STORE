@@ -39,6 +39,10 @@
           <a href="#about-section" class="nav-link-part">ABOUT US</a>
           <a href="#contact-section" class="nav-link-part">CONTACT</a>
           <a href="pages/login.html" class="nav-link-part">LOGIN</a>
+          <a class="nav-link-part" id="add-to-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count">0</span>
+          </a>
         </div>
       </div>
 
@@ -53,121 +57,54 @@
       </div>
     </div>
 
-    <!-- ----------------- -->
-    <!-- Product Section -->
-    <!-- ----------------- -->
-
     <div class="container">
       <div class="product-title"><h1>Products</h1></div>
 
+      <!-- Filter and Search Section -->
       <div class="product-header">
-        <select>
-          <option>Filter</option>
+        <!-- Category Section -->
+        <div class="category-section">
+          <h2 class="category-title" onclick="toggleCategory()">Categories</h2>
+          <div class="category-content">
+            <ul>
+              <li>Clothing</li>
+              <li>Accessories</li>
+              <li>Shoes</li>
+              <li>Electronics</li>
+            </ul>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="product-search"
+          placeholder="Search by name"
+          oninput="filterBySearch(event)"
+        />
+        <select onchange="filterByCriteria(this.value)" id="filter-select">
+          <option value="all">All</option>
+          <option value="low-to-high">Price: Low to High</option>
+          <option value="high-to-low">Price: High to Low</option>
+          <option value="sale">On Sale</option>
         </select>
-        <select>
-          <option>Best selling</option>
-        </select>
+
+        <button class="clear-filter" onclick="clearFilters()">
+          Clear Filter
+        </button>
       </div>
-      <div class="products">
-        <div class="product">
-          <img
-            alt="Lorem ipsum dolor sit amet."
-            height="200"
-            src="https://content.jdmagicbox.com/quickquotes/images_main/glow-in-dark-sticker-t-shirt-2111349432-3ffc0wdz.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit"
-            width="200"
-          />
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <div class="ratings">
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            (345 ratings)
-          </div>
-          <div class="price">₹300.00</div>
-          <div class="stock">
-            <i class="fas fa-bolt"> </i>
-            Only 8 item left
-          </div>
-          <button class="product-add-cart">ADD TO CART</button>
-        </div>
-        <div class="product">
-          <img
-            alt="Lorem ipsum dolor sit amet."
-            height="200"
-            src="https://content.jdmagicbox.com/quickquotes/images_main/glow-in-dark-sticker-t-shirt-2111349432-3ffc0wdz.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit"
-            width="200"
-          />
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <div class="ratings">
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            (345 ratings)
-          </div>
-          <div class="price">
-            ₹1800.00
-            <span class="old-price"> ₹3000.00 </span>
-          </div>
-          <div class="stock">
-            <i class="fas fa-bolt"> </i>
-            Only 29 item left
-          </div>
-          <button class="product-add-cart">ADD TO CART</button>
-        </div>
-        <div class="product">
-          <img
-            alt="Lorem ipsum dolor sit amet."
-            height="200"
-            src="https://content.jdmagicbox.com/quickquotes/images_main/glow-in-dark-sticker-t-shirt-2111349432-3ffc0wdz.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit"
-            width="200"
-          />
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <div class="ratings">
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            (345 ratings)
-          </div>
-          <div class="price">₹1800.00</div>
-          <div class="stock">
-            <i class="fas fa-bolt"> </i>
-            Only 6 item left
-          </div>
-          <button class="product-add-cart">ADD TO CART</button>
-        </div>
-        <div class="product">
-          <img
-            alt="Lorem ipsum dolor sit amet."
-            height="200"
-            src="https://content.jdmagicbox.com/quickquotes/images_main/glow-in-dark-sticker-t-shirt-2111349432-3ffc0wdz.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit"
-            width="200"
-          />
-          <h3>Lorem ipsum dolor sit amet.</h3>
-          <div class="ratings">
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            <i class="fas fa-star"> </i>
-            (345 ratings)
-          </div>
-          <div class="price">
-            ₹1000.00
-            <span class="old-price"> ₹2000.00 </span>
-          </div>
-          <div class="stock">
-            <i class="fas fa-bolt"> </i>
-            Let buy now
-          </div>
-          <button class="product-add-cart">ADD TO CART</button>
-        </div>
+
+      <div id="no-results" style="display: none">
+        No items found &nbsp;<i class="fa-solid fa-ban"></i>
       </div>
+
+      <div class="products" id="productContainer"></div>
+    </div>
+
+    <!-- Cart Modal (hidden by default) -->
+    <div id="cart-modal" class="cart-modal">
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <div id="cart-total" class="cart-total">Total: ₹0.00</div>
+      <button id="close-cart">Close</button>
     </div>
     <!-- ----------------- -->
     <!-- Popup Notification -->
