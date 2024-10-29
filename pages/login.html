@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../styles/register.css" />
+    <link rel="icon" type="image/x-icon" href="logo/logo.png" />
+    <!-- FontAwesome For Icons -->
+    <script
+      src="https://kit.fontawesome.com/cb104e752f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="register-page">
+      <div class="register-box-one">
+        <div class="welcome-message"><h1>Login</h1></div>
+        <div class="welcome-message">
+          Welcome back! Please log in to continue.
+        </div>
+        <div class="form-section">
+          <form id="loginForm" action="/">
+            <!-- Email Section -->
+            <div class="email-section">
+              <div class="email-section-felid">
+                <div class="icon">
+                  <i class="fa-solid fa-envelope" id="email-i"></i>
+                </div>
+                <div class="email-field">
+                  <input
+                    type="email"
+                    id="loginEmail"
+                    name="loginEmail"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="err-mess-user">
+                <div class="error-message" id="loginEmailError"></div>
+              </div>
+            </div>
+
+            <!-- Password Section -->
+            <div class="password-section">
+              <div class="password-section-felid">
+                <div class="icon">
+                  <i class="fa-solid fa-lock" id="password-i"></i>
+                </div>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    name="loginPassword"
+                    placeholder="Password"
+                  />
+                </div>
+              </div>
+              <div class="password-mess-user">
+                <div class="error-message" id="loginPasswordError"></div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-section">
+              <button type="submit" id="loginBtn">Login</button>
+              <button type="reset" id="resetBtn">Reset</button>
+            </div>
+          </form>
+        </div>
+        <div class="additional-links">
+          <p>
+            Don't have an account?
+            <a href="register.html" style="color: aqua">Register here</a>
+          </p>
+          <p class="back-to-home">
+            <a href="../index.html" style="color: aqua">Back to Home</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="../scripts/login.js"></script>
+  </body>
+</html>
